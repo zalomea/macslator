@@ -1,0 +1,12 @@
+.DS_Store
+*.xcodeproj
+*.xcworkspace
+.build/
+DerivedData/
+.venv/
+macslator.app/
+*.dmg
+*.zip
+*.tar.xz
+.vscode/
+.idea/
