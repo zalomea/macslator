@@ -49,6 +49,7 @@ final class MLXLLMServiceTests: XCTestCase {
         let snapshotDir = repoDir.appendingPathComponent("snapshots/\(commitHash)", isDirectory: true)
 
         try FileManager.default.createDirectory(at: snapshotDir, withIntermediateDirectories: true)
+        try FileManager.default.createDirectory(at: refsDir, withIntermediateDirectories: true)
         try "\(commitHash)\n".write(to: refsDir.appendingPathComponent("main"), atomically: true, encoding: .utf8)
         try Data([0x00, 0x01]).write(to: snapshotDir.appendingPathComponent("model.safetensors"))
 
@@ -73,6 +74,7 @@ final class MLXLLMServiceTests: XCTestCase {
         let snapshotDir = repoDir.appendingPathComponent("snapshots/abc123", isDirectory: true)
 
         try FileManager.default.createDirectory(at: snapshotDir, withIntermediateDirectories: true)
+        try FileManager.default.createDirectory(at: refsDir, withIntermediateDirectories: true)
         try "abc123\n".write(to: refsDir.appendingPathComponent("main"), atomically: true, encoding: .utf8)
         // No weights file present.
         try "config.json".write(to: snapshotDir.appendingPathComponent("config.json"), atomically: true, encoding: .utf8)

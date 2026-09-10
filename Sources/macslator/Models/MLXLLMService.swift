@@ -32,7 +32,7 @@ final class MLXLLMService: ObservableObject {
     private var loadedModelID: String?
     private var loadTask: Task<ModelContainer, Error>?
 
-    init() {}
+    nonisolated init() {}
 
     func load(modelID: String) async throws {
         // Cancel any in-flight load.
@@ -153,7 +153,7 @@ final class MLXLLMService: ObservableObject {
         return cleanTranslation(output)
     }
 
-    func translationPrompt(text: String, from source: Language, to target: Language) -> String {
+    nonisolated func translationPrompt(text: String, from source: Language, to target: Language) -> String {
         """
         Translate from \(source.displayName) to \(target.displayName). Reply with only the translation.
 
@@ -162,7 +162,7 @@ final class MLXLLMService: ObservableObject {
         """
     }
 
-    func cleanTranslation(_ raw: String) -> String {
+    nonisolated func cleanTranslation(_ raw: String) -> String {
         var cleaned = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         let stopMarkers = ["Input:", "Translation:", "Rules:", "Provide ONLY"]
         for marker in stopMarkers {
@@ -174,7 +174,7 @@ final class MLXLLMService: ObservableObject {
         return cleaned.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    func cachedSnapshotDirectory(for modelID: String) -> URL? {
+    nonisolated func cachedSnapshotDirectory(for modelID: String) -> URL? {
         let fileManager = FileManager.default
         let cacheDir = MLXLLMService.cacheDirectoryURL()
 
@@ -211,7 +211,7 @@ final class MLXLLMService: ObservableObject {
         return snapshotDir
     }
 
-    func hasWeights(in directory: URL) -> Bool {
+    nonisolated func hasWeights(in directory: URL) -> Bool {
         let fileManager = FileManager.default
         guard let enumerator = fileManager.enumerator(at: directory, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles]) else {
             return false
@@ -229,7 +229,7 @@ final class MLXLLMService: ObservableObject {
 
     // MARK: - Cache management
 
-    static func cacheDirectoryURL() -> URL {
+    nonisolated static func cacheDirectoryURL() -> URL {
         let fileManager = FileManager.default
 
         if let hubCache = ProcessInfo.processInfo.environment["HF_HUB_CACHE"], !hubCache.isEmpty {
