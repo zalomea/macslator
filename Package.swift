@@ -25,6 +25,11 @@ let package = Package(
                 .product(name: "HuggingFace", package: "swift-huggingface")
             ],
             path: "Sources/macslator"
+        ),
+        .testTarget(
+            name: "macslatorTests",
+            dependencies: ["macslator"],
+            path: "Tests/macslatorTests"
         )
     ]
 )

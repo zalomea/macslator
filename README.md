@@ -102,6 +102,10 @@ macslator/
 ├── scripts/
 │   ├── build_app.sh               # Builds the .app bundle and a .dmg
 │   └── generate_icon.swift        # Regenerates the app icon
+├── Tests/
+│   └── macslatorTests/            # Unit tests (cleanTranslation, cache detection, HF model decoding)
+├── .github/
+│   └── workflows/                 # CI (build + test) and release (DMG upload) pipelines
 └── README.md
 ```
 
